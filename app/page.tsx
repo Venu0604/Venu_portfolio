@@ -93,7 +93,7 @@ export default function DarkPortfolio() {
     setResult("Sending....");
     setToast({ type: "success", text: "Sending message..." });
     
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
     formData.append("access_key", "b6d0f110-90fc-45d2-84ad-9834605f084e");
 
     try {

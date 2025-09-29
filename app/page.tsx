@@ -83,7 +83,7 @@ export default function DarkPortfolio() {
     return () => clearTimeout(t);
   }, [toast]);
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult("Sending....");
     setToast({ type: "success", text: "Sending message..." });

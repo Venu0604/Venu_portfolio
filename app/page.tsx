@@ -107,7 +107,7 @@ export default function DarkPortfolio() {
       if (data.success) {
         setResult("Form Submitted Successfully");
         setToast({ type: "success", text: "Message sent successfully!" });
-        event.target.reset();
+        event.currentTarget.reset();
       } else {
         console.log("Error", data);
         setResult(data.message);
@@ -198,9 +198,6 @@ export default function DarkPortfolio() {
                 className="object-cover"
                 priority
                 sizes="160px"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
               />
             </motion.div>
 

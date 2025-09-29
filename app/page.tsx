@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Briefcase, GraduationCap, ExternalLink, Award, Menu, X, MapPin } from "lucide-react";
+import { Mail, Linkedin, Github, Briefcase, ExternalLink, Award, Menu, X, MapPin } from "lucide-react";
 
 const PROFILE = {
   name: "P. Venugopal",
@@ -56,7 +57,7 @@ export default function DarkPortfolio() {
   const [toast, setToast] = useState(null);
   const [result, setResult] = useState("");
 
-  const sectionIds = ["home", "about", "experience", "projects", "skills", "certifications", "contact"];
+  const sectionIds = useMemo(() => ["home", "about", "experience", "projects", "skills", "certifications", "contact"], []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,7 +75,7 @@ export default function DarkPortfolio() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [sectionIds]);
 
   useEffect(() => {
     if (!toast) return;
@@ -180,24 +181,22 @@ export default function DarkPortfolio() {
         <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
           <div className="container mx-auto px-6 text-center">
             <motion.div
-              className="w-40 h-40 mx-auto rounded-full border-4 border-gradient-to-r from-cyan-400 to-blue-400 shadow-2xl mb-8 overflow-hidden"
+              className="w-40 h-40 mx-auto rounded-full border-4 border-gradient-to-r from-cyan-400 to-blue-400 shadow-2xl mb-8 overflow-hidden relative"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 120 }}
             >
-              <img
+              <Image
                 src="/P_Venugopal_image.jpg"
                 alt="P. Venugopal"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority
+                sizes="160px"
                 onError={(e) => {
                   e.target.style.display = 'none';
-                  const fallback = e.target.nextElementSibling;
-                  if (fallback) fallback.style.display = 'flex';
                 }}
               />
-              <div className="w-full h-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-6xl font-bold text-white" style={{display: 'none'}}>
-                V
-              </div>
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-6xl font-bold mb-4" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
@@ -264,7 +263,7 @@ export default function DarkPortfolio() {
                 </h4>
                 
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  I'm passionate about uncovering patterns in data and transforming them into impactful business insights. 
+                  I&apos;m passionate about uncovering patterns in data and transforming them into impactful business insights. 
                   My journey spans healthcare, marketing, and finance, giving me a versatile problem-solving mindset. 
                   I thrive on translating raw data into clear, actionable stories that guide strategic decisions and help 
                   organizations grow by making data work smarter.
@@ -451,7 +450,7 @@ export default function DarkPortfolio() {
                 <div className="mt-6">
                   <p className="text-gray-400 mb-4">
                     I am currently available for freelance work and full-time opportunities. 
-                    Let us discuss how I can help bring your data projects to life!
+                    Let&apos;s discuss how I can help bring your data projects to life!
                   </p>
                   <div className="flex gap-4">
                     <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-3 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all">

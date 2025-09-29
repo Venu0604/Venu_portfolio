@@ -51,10 +51,15 @@ function goTo(id: string) {
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+interface Toast {
+  type: "success" | "error";
+  text: string;
+}
+
 export default function DarkPortfolio() {
   const [active, setActive] = useState("home");
   const [openNav, setOpenNav] = useState(false);
-  const [toast, setToast] = useState(null);
+  const [toast, setToast] = useState<Toast | null>(null);
   const [result, setResult] = useState("");
 
   const sectionIds = useMemo(() => ["home", "about", "experience", "projects", "skills", "certifications", "contact"], []);

@@ -512,7 +512,7 @@ export default function DarkPortfolio() {
       <footer className="py-8 bg-gray-900 border-t border-gray-800">
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} {PROFILE.name} — Built with ❤️ 
+            © {new Date().getFullYear()} {PROFILE.name} — Built with ❤️ and React
           </p>
         </div>
       </footer>

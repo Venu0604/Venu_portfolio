@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Briefcase, ExternalLink, Award, Menu, X, MapPin } from "lucide-react";
 
@@ -93,7 +92,8 @@ export default function DarkPortfolio() {
     setResult("Sending....");
     setToast({ type: "success", text: "Sending message..." });
     
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     formData.append("access_key", "b6d0f110-90fc-45d2-84ad-9834605f084e");
 
     try {
@@ -107,7 +107,7 @@ export default function DarkPortfolio() {
       if (data.success) {
         setResult("Form Submitted Successfully");
         setToast({ type: "success", text: "Message sent successfully!" });
-        event.currentTarget.reset();
+        form.reset();
       } else {
         console.log("Error", data);
         setResult(data.message);
@@ -186,19 +186,14 @@ export default function DarkPortfolio() {
         <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
           <div className="container mx-auto px-6 text-center">
             <motion.div
-              className="w-40 h-40 mx-auto rounded-full border-4 border-gradient-to-r from-cyan-400 to-blue-400 shadow-2xl mb-8 overflow-hidden relative"
+              className="w-40 h-40 mx-auto rounded-full border-4 border-cyan-400 shadow-2xl mb-8 overflow-hidden relative bg-gray-700"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 120 }}
             >
-              <Image
-                src="/P_Venugopal_image.jpg"
-                alt="P. Venugopal"
-                fill
-                className="object-cover"
-                priority
-                sizes="160px"
-              />
+              <div className="w-full h-full flex items-center justify-center text-6xl font-bold text-cyan-400">
+                PV
+              </div>
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-6xl font-bold mb-4" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>

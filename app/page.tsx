@@ -48,7 +48,16 @@ const PROJECTS = [
 
 function goTo(id: string) {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (el) {
+    const headerOffset = 64; // Height of fixed header
+    const elementPosition = el.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  }
 }
 
 interface Toast {
@@ -187,19 +196,29 @@ export default function DarkPortfolio() {
         <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
           <div className="container mx-auto px-6 text-center">
             <motion.div
-              className="w-40 h-40 mx-auto rounded-full border-4 border-cyan-400 shadow-2xl mb-8 overflow-hidden relative"
+              className="relative w-64 h-64 mx-auto mb-8"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 120 }}
             >
-              <Image
-                src="/P_Venugopal_image.jpg"
-                alt="P. Venugopal"
-                fill
-                className="object-cover"
-                priority
-                sizes="160px"
-              />
+              {/* Subtle outer glow - circular */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/30 via-blue-500/30 to-purple-500/30 blur-xl"></div>
+
+              {/* Clean gradient border - circular */}
+              <div className="absolute inset-2 rounded-full overflow-hidden bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 p-1 shadow-2xl">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white group cursor-pointer">
+                  <div className="w-full h-full rounded-full overflow-hidden relative">
+                    <Image
+                      src="/P_Venugopal_image.jpg"
+                      alt="P. Venugopal"
+                      fill
+                      className="object-cover object-center rounded-full scale-100 group-hover:scale-110 transition-transform duration-500 ease-out"
+                      priority
+                      sizes="256px"
+                    />
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-6xl font-bold mb-4" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
@@ -248,9 +267,9 @@ export default function DarkPortfolio() {
         </section>
 
         {/* About */}
-        <section id="about" className="py-16 bg-gradient-to-b from-gray-800 to-gray-900">
+        <section id="about" className="py-12 bg-gradient-to-b from-gray-800 to-gray-900">
           <div className="container mx-auto px-6 max-w-4xl">
-            <motion.h3 className="text-3xl font-bold text-center mb-12" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.h3 className="text-3xl font-bold text-center mb-8" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">About Me</span>
             </motion.h3>
 
@@ -277,9 +296,9 @@ export default function DarkPortfolio() {
         </section>
 
         {/* Experience */}
-        <section id="experience" className="py-16 bg-gray-900">
+        <section id="experience" className="py-12 bg-gray-900">
           <div className="container mx-auto px-6 max-w-5xl">
-            <motion.h3 className="text-3xl font-bold mb-10 flex items-center justify-center gap-3" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.h3 className="text-3xl font-bold mb-8 flex items-center justify-center gap-3" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <Briefcase className="text-cyan-400" />
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Experience</span>
             </motion.h3>
@@ -312,9 +331,9 @@ export default function DarkPortfolio() {
         </section>
 
         {/* Projects */}
-        <section id="projects" className="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
+        <section id="projects" className="py-12 bg-gradient-to-b from-gray-900 to-gray-800">
           <div className="container mx-auto px-6 max-w-5xl">
-            <motion.h3 className="text-3xl font-bold mb-10 flex items-center justify-center gap-3" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.h3 className="text-3xl font-bold mb-8 flex items-center justify-center gap-3" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <ExternalLink className="text-cyan-400" />
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Projects</span>
             </motion.h3>
@@ -345,9 +364,9 @@ export default function DarkPortfolio() {
         </section>
 
         {/* Skills */}
-        <section id="skills" className="py-16 bg-gray-900">
+        <section id="skills" className="py-12 bg-gray-900">
           <div className="container mx-auto px-6 max-w-4xl">
-            <motion.h3 className="text-3xl font-bold mb-10 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.h3 className="text-3xl font-bold mb-8 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Skills & Technologies</span>
             </motion.h3>
 
@@ -369,9 +388,9 @@ export default function DarkPortfolio() {
         </section>
 
         {/* Certifications */}
-        <section id="certifications" className="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
+        <section id="certifications" className="py-12 bg-gradient-to-b from-gray-900 to-gray-800">
           <div className="container mx-auto px-6 max-w-4xl">
-            <motion.h3 className="text-3xl font-bold mb-10 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.h3 className="text-3xl font-bold mb-8 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent flex items-center justify-center gap-2">
                 <Award className="text-cyan-400" />
                 Certifications
@@ -422,9 +441,9 @@ export default function DarkPortfolio() {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="py-16 bg-gradient-to-b from-gray-800 to-gray-900">
+        <section id="contact" className="py-12 bg-gradient-to-b from-gray-800 to-gray-900">
           <div className="container mx-auto px-6 max-w-6xl">
-            <motion.h3 className="text-3xl font-bold mb-10 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.h3 className="text-3xl font-bold mb-8 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Get In Touch</span>
             </motion.h3>
 

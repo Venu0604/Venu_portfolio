@@ -22,7 +22,14 @@ const EXPERIENCE = [
     company: "Nxtify Technologies Pvt Ltd",
     start: "Apr 2025",
     end: "Present",
-    bullets: ["Tracked daily orders, transactions and deal performance", "Automated finance & campaign ROI reports", "Managed influencer data & reward programs"]
+    bullets: [
+      "Tracked daily orders, transactions and deal performance",
+      "Automated finance & campaign ROI reports",
+      "Managed influencer data & reward programs",
+      "Developed HDFC dashboard analysis for data-driven insights",
+      "Automated email workflows for marketing campaigns",
+      "Conducted comprehensive campaign analysis to optimize performance"
+    ]
   },
   {
     title: "Data Analyst", 

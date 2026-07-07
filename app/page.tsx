@@ -142,6 +142,8 @@ export default function DarkPortfolio() {
       {/* Toast */}
       {toast && (
         <motion.div
+          role="status"
+          aria-live="polite"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'} text-white`}
@@ -156,15 +158,17 @@ export default function DarkPortfolio() {
           <button
             className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
             onClick={() => goTo("home")}
+            aria-label="Go to home section"
           >
             Venugopal
           </button>
-          
-          <nav className="hidden md:flex gap-2">
+
+          <nav className="hidden md:flex gap-2" aria-label="Primary">
             {sectionIds.map((id) => (
               <button
                 key={id}
                 onClick={() => goTo(id)}
+                aria-current={active === id ? "page" : undefined}
                 className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${
                   active === id ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white" : "text-gray-300 hover:text-white hover:bg-gray-800"
                 }`}
@@ -176,7 +180,12 @@ export default function DarkPortfolio() {
 
           <div className="flex items-center gap-3">
             <div className="md:hidden">
-              <button onClick={() => setOpenNav(!openNav)} className="p-2 text-gray-400 hover:text-white">
+              <button
+                onClick={() => setOpenNav(!openNav)}
+                className="p-2 text-gray-400 hover:text-white"
+                aria-label={openNav ? "Close menu" : "Open menu"}
+                aria-expanded={openNav}
+              >
                 {openNav ? <X /> : <Menu />}
               </button>
             </div>
@@ -189,6 +198,7 @@ export default function DarkPortfolio() {
               <button
                 key={id}
                 onClick={() => { goTo(id); setOpenNav(false); }}
+                aria-current={active === id ? "page" : undefined}
                 className={`block w-full text-left px-3 py-2 rounded ${active === id ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white" : "text-gray-300 hover:bg-gray-700"}`}
               >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
@@ -243,13 +253,13 @@ export default function DarkPortfolio() {
             </motion.p>
 
             <motion.div className="flex justify-center gap-6 text-2xl mb-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-              <a href={`mailto:${PROFILE.email}`} className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href={`mailto:${PROFILE.email}`} className="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="Email P. Venugopal">
                 <Mail />
               </a>
-              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="P. Venugopal on LinkedIn">
                 <Linkedin />
               </a>
-              <a href={PROFILE.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href={PROFILE.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="P. Venugopal on GitHub">
                 <Github />
               </a>
             </motion.div>
@@ -482,10 +492,10 @@ export default function DarkPortfolio() {
                     Let&apos;s discuss how I can help bring your data projects to life!
                   </p>
                   <div className="flex gap-4">
-                    <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-3 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all">
+                    <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-3 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all" aria-label="P. Venugopal on LinkedIn">
                       <Linkedin size={24} />
                     </a>
-                    <a href={PROFILE.github} target="_blank" rel="noreferrer" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-3 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all">
+                    <a href={PROFILE.github} target="_blank" rel="noreferrer" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-3 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all" aria-label="P. Venugopal on GitHub">
                       <Github size={24} />
                     </a>
                   </div>
@@ -494,8 +504,9 @@ export default function DarkPortfolio() {
 
               <motion.form onSubmit={onSubmit} className="space-y-4" initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Name</label>
+                  <label htmlFor="contact-name" className="block text-gray-300 text-sm font-medium mb-2">Name</label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     required
@@ -504,8 +515,9 @@ export default function DarkPortfolio() {
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Email</label>
+                  <label htmlFor="contact-email" className="block text-gray-300 text-sm font-medium mb-2">Email</label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
                     required
@@ -514,8 +526,9 @@ export default function DarkPortfolio() {
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Message</label>
+                  <label htmlFor="contact-message" className="block text-gray-300 text-sm font-medium mb-2">Message</label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     rows={4}
                     required
@@ -529,7 +542,7 @@ export default function DarkPortfolio() {
                 >
                   Send Message
                 </button>
-                {result && <p className="text-center text-gray-300">{result}</p>}
+                {result && <p role="status" aria-live="polite" className="text-center text-gray-300">{result}</p>}
               </motion.form>
             </div>
           </div>
